@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+transformers
+sentencepiece
+texttable
+toml
+aioredis
+pyyaml

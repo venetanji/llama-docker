@@ -1,0 +1,28 @@
+
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  api:
+    build: .
+    entrypoint: "sleep infinity"
+    environment:
+      - APP_ENV=development
+    volumes:
+      - ./src:/workspace/src
+    ports:
+      - "3500:3500"
+
+  worker:
+    build: .
+    entrypoint: "sleep infinity"
+    volumes:
+      - ./models:/models
+      - ./src:/workspace/src
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: ["gpu"]
